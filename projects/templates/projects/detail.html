@@ -1,0 +1,71 @@
+{% load custom_filters %}
+<!-- Le styles -->
+    <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+       <title>CU Project Manager</title>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <div class="span11">
+        <div id="project">
+
+ <br />
+ {% for message in flash.notice %}
+    <div id="flash">{{ message }}</div>
+{% endfor %}
+{% for message in flash.warning %}
+    <div id="warning">{{ message }}</div>
+{% endfor %}
+
+<br />
+
+<h1>{{ project.name }}</h1>
+
+Description: {{ project.description}}
+<br />
+
+Start date: {{ project.start_date}}
+<br />
+End date: {{ project.end_date}}
+<br />
+Owner:  {{ project.user.username}}
+<br />
+<br />
+
+Project users:
+<br />
+{% for users in users %}
+{{ users.username }}
+
+<br />
+  {% endfor %}
+<br />
+
+<div class="ticketlist">
+Tickets:
+{% for ticket in project.ticket_set.all %}
+
+        <li><a href="{% url ticket_detail project.id ticket.id%}">{{ ticket.name }}</a>   Owner: {{ ticket.user.username }}</li>
+    {% endfor %}
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+</div>
+<br />
+{% if user in users or project|ownership:user %}
+<a href="{% url ticket_add project.id %}"><h3>Add a ticket for {{ project.name }}</h3></a>
+<br />
+{% endif %}
+
+<br />
+{% if project|ownership:user %}
+<a href="{% url edit project.id %}"><h3>Edit this project</h3></a>
+
+<a href="{% url delete project.id %}"><h3>Delete this project</h3></a>
+{% endif %}
+<a href="/projects/">Back to list</a>
+<br />
+<a href="/logout/">logout</a>
+</div>
+</div>

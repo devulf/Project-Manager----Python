@@ -1,0 +1,23 @@
+<!-- Le styles -->
+    <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+       <title>CU Project Manager</title>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <div class="span11">
+        <div id="project">
+
+<form action="{{ ticket_edit }}" method = 'post' >
+  {% csrf_token %}
+{{ form.as_p }}
+
+
+    <input type="submit" value="Edit ticket">
+  </form>
+<input type=button value="Previous Page" onClick="javascript:history.go(-1);">
+<br />
+  <a href="/logout/">logout</a>
+</div>
+</div>

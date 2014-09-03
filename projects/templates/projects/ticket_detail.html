@@ -1,0 +1,43 @@
+{% load custom_filters %}
+
+<!-- Le styles -->
+    <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+       <title>CU Project Manager</title>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+
+    <div class="span11">
+        <div id="project">
+          {% for message in flash.notice %}
+    <div id="flash">{{ message }}</div>
+{% endfor %}
+{% for message in flash.warning %}
+    <div id="warning">{{ message }}</div>
+{% endfor %}
+
+<br />
+
+<h1>Name: {{ ticket.name }}</h1>
+
+Status: {{ ticket.status.status_name}}
+<br />
+Description: {{ ticket.description}}
+<br />
+Owner:  {{ ticket.user.username}}
+<br />
+
+{% if ticket|ownership:user %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<br />
+<a href="{% url ticket_edit project.id ticket.id %}"><h3>Edit this ticket</h3></a>
+
+<a href="{% url ticket_delete project.id ticket.id %}"><h3>Delete this ticket</h3></a>
+{% endif %}
+<input type=button value="Previous Page" onClick="javascript:history.go(-1);">
+<br />
+<a href="/logout/">logout</a>
+</div>
+</div>

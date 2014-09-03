@@ -1,0 +1,55 @@
+{% load staticfiles %}
+
+
+<!-- Le styles -->
+     <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+     <title>CU Project Manager</title>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+
+      <div class="span11">
+        <div id="project">
+          <h2>CU Project Manager</h2>
+ <form method="get" action="search">
+{{ request.user.id }}
+  <p>Search:
+  <input type="text" name="q" id="query" />
+  <input type="submit" value="Submit" /></p>
+ </form>
+
+
+ <br />
+ {% for message in flash.notice %}
+    <div id="flash">{{ message }}</div>
+{% endfor %}
+{% for message in flash.warning %}
+    <div id="warning">{{ message }}</div>
+{% endfor %}
+{% if latest_project_list %}
+
+<div class="ticketlist"
+<h3> Projects </h3>
+
+    {% for proj in latest_project_list %}
+
+
+        <li><a href="{% url detail proj.id %}">{{ proj.name }}</a></li>
+
+    {% endfor %}
+
+      </div>
+{% else %}
+    <p>No projects are available.</p>
+{% endif %}
+
+
+<a href="{% url add %}"><h3>Add a project</a></h3>
+
+<br />
+
+<a href="/logout/">logout</a>
+</div>
+</div>

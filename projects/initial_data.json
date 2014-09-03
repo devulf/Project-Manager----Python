@@ -1,0 +1,18 @@
+[
+{
+"model": "course_app.project",
+"pk": 1,
+"fields": {
+  "username": "testuser"
+  }
+},
+
+{
+"model": "course_app.project",
+"pk": 2,
+"fields": {
+  "username": "testuser2"
+  }
+}
+
+]

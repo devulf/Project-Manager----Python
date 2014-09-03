@@ -1,0 +1,36 @@
+ <!-- Le styles -->
+    <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+       <title>CU Project Manager</title>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+
+<div class="span11">
+        <div id="project">
+<h2>CU Project Manager</h2>
+ <br />
+ {% for message in flash.notice %}
+    <div id="flash">{{ message }}</div>
+{% endfor %}
+{% for message in flash.warning %}
+    <div id="warning">{{ message }}</div>
+{% endfor %}
+
+  <form action="{{ login_user }}" method="POST">
+    {% csrf_token %}
+
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}" />
+    {% endif %}
+    username:
+    <input type="text" name="username" value="{{ username}}" /><br />
+    password:
+    <input type="password" name="password" value="" /><br />
+
+    <input type="submit" value="Log In" />
+  </form>
+</div>
+</div>
+
